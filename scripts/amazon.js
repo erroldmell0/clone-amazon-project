@@ -58,7 +58,7 @@ products.forEach((product) => {
 document.querySelector('.products-grid').innerHTML = productsHtml;
 
 //everything that happens after the button click
-function updateCartQuantity() {
+ function updateCartQuantity() {
   let cartTotalQuantity=0;
   cart.forEach((cartItem) => {
     cartTotalQuantity += cartItem.quantity;

@@ -102,8 +102,19 @@ document.querySelectorAll(".js-delete-link")
       const productId = link.dataset.productId;
       removeFromCart(productId);
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
-    container.remove();
+      container.remove();
+      updateCheckoutheading();
     });
-
-    
   });
+
+updateCheckoutheading()
+function updateCheckoutheading() {
+  let quantity = 0;
+  cart.forEach((cart) =>{
+    quantity += cart.quantity;
+  });
+
+  document.querySelector('.js-return-to-home-link')
+    .innerHTML = quantity;
+}
+  
