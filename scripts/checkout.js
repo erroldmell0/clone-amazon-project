@@ -1,6 +1,6 @@
-import {cart,removeFromCart,calculateCartQuantity,updateQuantity} from '../data/cart.js'; //named export 
+import {cart,removeFromCart,calculateCartQuantity,updateQuantity,updateDeliveryOption} from '../data/cart.js'; //named export 
 import {products} from '../data/products.js';
-import { formatCurrency } from './utils/money.js'; // ./ : add it to make it a module
+import {formatCurrency} from './utils/money.js'; // ./ : add it to make it a module
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'; //default export
 import {deliveryOptions} from '../data/deliveryOptions.js';
 
@@ -83,7 +83,8 @@ function deliveryOptionHtml(matchingProduct, cartItem) {
   const priceString = deliveryoptions.priceCents===0?'Free':`$${formatCurrency(deliveryoptions.priceCents)}`
 
   const isChecked = deliveryoptions.id ===cartItem.deliveryOptionId;
-    html += `<div class="delivery-option">
+    html += `<div class="delivery-option js-delivery-option" 
+              data-product-id="${matchingProduct.id}" data-delivery-option-id="${deliveryoptions.id}">
           <input type="radio"
             ${isChecked?'checked':''}
             class="delivery-option-input"
@@ -101,6 +102,15 @@ function deliveryOptionHtml(matchingProduct, cartItem) {
 
   return html
 }
+
+//adding eventlistener to the radio buttons
+document.querySelectorAll('.js-delivery-option')
+  .forEach((element) => {
+    element.addEventListener('click', ()=> {
+      const {productId,deliveryOptionId} = element.dataset;
+      updateDeliveryOption(productId,deliveryOptionId);
+    });
+  });
 
 //delete event listner
 document.querySelectorAll(".js-delete-link")
