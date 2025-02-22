@@ -56,5 +56,4 @@ export function renderPaymentSummary() {
   `
 
   document.querySelector('.payment-summary').innerHTML = paymentSummaryHtml;
-  console.log(productPriceCents,shippingPriceCents);
 }

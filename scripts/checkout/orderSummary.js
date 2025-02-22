@@ -161,6 +161,7 @@ export function renderOrderSummary() {
       updateCheckoutheading();
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.classList.remove('is-editing-quantity');
+      renderPaymentSummary();
     });
   });
 }
