@@ -5,20 +5,36 @@ import { renderPaymentSummary } from './checkout/paymentSummary.js';
 import { loadProducts,loadProductsFetch } from '../data/products.js';
 import { loadCart } from '../data/cart.js';
 
+async function loadPage() {
 
-Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
+  await loadProductsFetch();
+
+  await new Promise((resolve) => {
     loadCart(() => {
       resolve();
     });
-  })
+  });
 
-]).then((value1) => {
-  console.log(value1);
   renderOrderSummary();
   renderPaymentSummary();
-});
+    
+}
+
+loadPage();
+
+// Promise.all([
+//   loadProductsFetch(),
+//   new Promise((resolve) => {
+//     loadCart(() => {
+//       resolve();
+//     });
+//   })
+
+// ]).then((value1) => {
+//   console.log(value1);
+//   renderOrderSummary();
+//   renderPaymentSummary();
+// });
 
 /*
 new Promise((resolve) => {
